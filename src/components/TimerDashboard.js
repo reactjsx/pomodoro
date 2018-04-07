@@ -19,7 +19,6 @@ class TimerDashboard extends Component {
   }
   
   handleTimerOver = () => {
-    const newNthOfInterval = this.state.nthOfInterval < 3 ? this.state.nthOfInterval + 1 : 0;
     if (this.state.mode !== 'Work') {
       this.setState({
         mode: 'Work',
@@ -27,17 +26,16 @@ class TimerDashboard extends Component {
         duration: 1500000,
         started: false,
         runningSince: null,
-        nthOfInterval: newNthOfInterval
+        nthOfInterval: this.state.nthOfInterval < 3 ? this.state.nthOfInterval + 1 : 0
       });
     } else {
-      const newDuration = this.state.nthOfInterval < 3 ? 300000 : 1500000;
+      const newDuration = this.state.nthOfInterval < 3 ? 300000 : 900000;
       this.setState({
         mode: 'Relax',
         inspiration: 'Time to relax :)',
         duration: newDuration,
         started: false,
-        runningSince: null,
-        nthOfInterval: newNthOfInterval
+        runningSince: null
       });
     }
   }
